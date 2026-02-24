@@ -1,0 +1,14 @@
+# Mengabaikan environment dan cache Python
+backend/venv/
+backend/__pycache__/
+
+# Mengabaikan file model berukuran besar
+*.pth
+*.pt
+
+# Mengabaikan file Node.js dan Next.js (meskipun di dalam frontend sudah ada)
+frontend/node_modules/
+frontend/.next/
+
+backend/venv/
+*.pth
