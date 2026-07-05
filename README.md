@@ -1,65 +1,107 @@
-# 🧠 Deepfake Detector
+# Deepfake Detector 🕵️‍♂️
 
-Aplikasi deteksi deepfake berbasis **Artificial Intelligence (AI)** yang memungkinkan pengguna mengunggah gambar atau video untuk diperiksa apakah konten tersebut asli atau hasil manipulasi deepfake.
+> **Deteksi gambar deepfake berbasis AI dengan EfficientNet-B0 dan SE-Block**
 
-## ✨ Fitur
+Proyek ini adalah sistem deteksi deepfake yang menggabungkan **frontend Next.js** modern dengan **backend Python (FastAPI + PyTorch)** untuk mengidentifikasi apakah suatu gambar adalah asli (*real*) atau hasil manipulasi deepfake.
 
-- **Upload & Deteksi** — Unggah gambar/video untuk dianalisis secara real-time
-- **Pipeline Deteksi** — Visualisasi proses deteksi dari awal hingga hasil
-- **Arsitektur Sistem** — Penjelasan bagaimana model AI bekerja dalam mendeteksi deepfake
-- **Informasi Edukatif** — Penjelasan tentang apa itu deepfake dan cara kerjanya
-- **Tampilan Modern** — UI responsif dengan animasi partikel background
+Model menggunakan arsitektur **EfficientNet-B0** yang sudah di-*fine-tune* dengan tambahan **Squeeze-and-Excitation Block (SE-Block)** untuk memberikan perhatian khusus (*channel attention*) pada artefak halus khas deepfake, seperti ketidakwajaran tekstur kulit, pola pencahayaan, dan gradien tepi.
+
+---
+
+## ✨ Fitur Utama
+
+- **Upload & Drag-and-Drop** — Unggah gambar dengan mudah, dukungan drag-and-drop
+- **Deteksi Real-time** — Analisis gambar dalam hitungan detik
+- **Visual Arsitektur Model** — Penjelasan interaktif alur EfficientNet-SE
+- **Pipeline Deteksi** — Visualisasi langkah demi langkah proses inferensi
+- **Informasi Edukatif** — Penjelasan tentang deepfake dan cara kerjanya
+- **Privasi Terjaga** — Gambar tidak disimpan, hanya digunakan untuk inferensi
+- **Animasi Particles** — Latar belakang partikel interaktif yang memukau
+- **Responsive Design** — Tampilan optimal di semua perangkat
 
 ## 🛠️ Tech Stack
 
 ### Frontend
-- **Next.js** — React framework
-- **TypeScript** — Type safety
-- **Tailwind CSS** — Utility-first styling
-- **shadcn/ui** — UI component library
+- **Framework:** Next.js 15 (App Router)
+- **Bahasa:** TypeScript
+- **UI Library:** React 19 + shadcn/ui
+- **Styling:** Tailwind CSS 4
+- **Animasi:** Framer Motion, tsparticles
+- **Ikon:** Lucide React, React Icons
 
 ### Backend
-- **Python** — Core detection logic
-- Backend Python terletak di folder `backend/`
+- **Framework:** FastAPI (Python)
+- **Deep Learning:** PyTorch + torchvision
+- **Model:** EfficientNet-B0 + SE-Block (*custom classifier*)
+- **Image Processing:** Pillow (PIL)
 
-## 🚀 Cara Menjalankan
+---
 
-### Frontend
+## 🚀 Cara Install & Jalankan
+
+### Prasyarat
+- Node.js 18+
+- Python 3.10+
+- npm atau yarn
+
+### 1. Clone Repository
+```bash
+git clone https://github.com/pandupan/deepfake-detector.git
+cd deepfake-detector
+```
+
+### 2. Setup Backend (Python)
+```bash
+cd backend
+pip install -r requirements.txt  # atau install manual: fastapi, torch, torchvision, pillow, uvicorn
+uvicorn main:app --reload
+```
+Backend akan berjalan di `http://localhost:8000`.
+
+### 3. Setup Frontend (Next.js)
 ```bash
 cd frontend
 npm install
 npm run dev
 ```
+Frontend akan berjalan di `http://localhost:3000`.
 
-### Backend
-```bash
-cd backend
-pip install -r requirements.txt
-python main.py
+### 4. Gunakan
+Buka `http://localhost:3000`, unggah gambar, dan AI akan mendeteksi apakah gambar tersebut asli atau deepfake.
+
+---
+
+## 📁 Struktur Folder
+
 ```
-
-## 📁 Struktur Proyek
-
-```
-├── frontend/               # Next.js frontend application
-│   ├── app/                # App router pages
-│   ├── components/         # React komponen
-│   │   ├── Architecture.tsx
+deepfake-detector/
+├── backend/
+│   └── main.py              # API FastAPI + model inference
+├── frontend/
+│   ├── app/
+│   │   ├── page.tsx         # Halaman utama
+│   │   ├── layout.tsx       # Layout root
+│   │   └── globals.css      # Global styles
+│   ├── components/
+│   │   ├── Navbar.tsx
 │   │   ├── HeroSection.tsx
+│   │   ├── WhatIsDeepfake.tsx
 │   │   ├── HowItWorks.tsx
-│   │   ├── Pipeline.tsx
-│   │   ├── Uploader.tsx
-│   │   └── WhatIsDeepfake.tsx
-│   └── ...
-├── backend/                # Python backend
-│   └── main.py             # Entry point backend
+│   │   ├── Architecture.tsx  # Arsitektur model interaktif
+│   │   ├── Pipeline.tsx      # Pipeline deteksi
+│   │   ├── Uploader.tsx      # Upload & deteksi
+│   │   ├── ParticlesBG.tsx
+│   │   └── Footer.tsx
+│   ├── lib/
+│   │   └── utils.ts
+│   └── package.json
 └── README.md
 ```
 
 ## 📄 Lisensi
 
-Distributed under the MIT License.
+Proyek ini dilisensikan di bawah **MIT License** — lihat file [LICENSE](LICENSE) untuk detail lebih lanjut.
 
 ---
 
-> Dibuat oleh [Pandu Pangestu](https://github.com/pandupan) — Proyek deteksi deepfake untuk edukasi dan penelitian.
+> Dibuat oleh [Pandu Pangestu](https://github.com/pandupan) sebagai bagian dari proyek deteksi deepfake dengan pendekatan deep learning.
